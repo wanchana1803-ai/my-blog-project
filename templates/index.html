@@ -11,7 +11,13 @@
         <article ...>
             <h2>{{ post.title }}</h2>
             <small>
-                เขียนโดย: <strong>{{ post.author.username }}</strong> 
+                เขียนโดย: 
+                <strong>
+                    {{ post.author.username }}
+                    {% if post.author.is_admin %}
+                        <span style="color: #FFD700;">(admin)</span>
+                    {% endif %}
+                    </strong> 
                 เมื่อ: {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}
             </small>
 

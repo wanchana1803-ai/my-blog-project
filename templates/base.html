@@ -30,7 +30,12 @@
             {% endif %}
             <a href="{{ url_for('logout') }}">ล็อกเอาต์</a>
             <span style="color: white; float: right; margin-right: 20px;">
-                สวัสดี, {{ current_user.username }}!
+                สวัสดี, {{ current_user.username }}
+                
+                {% if current_user.is_admin %}
+                    <strong style="color: #FFD700;">(admin)</strong>
+                {% endif %}
+                !
             </span>
         {% else %}
             <a href="{{ url_for('home') }}">หน้าแรก</a>

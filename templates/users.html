@@ -5,7 +5,13 @@
     <ol>
         {% for user in users %}
             <li>
-                <strong>{{ user.username }}</strong> (ID: {{ user.id }})
+                <strong>
+                    {{ user.username }}
+                    {% if user.is_admin %}
+                        <span style="color: #FFD700;">(admin)</span>
+                    {% endif %}
+                </strong> 
+                (ID: {{ user.id }})
                 
                 <a href="{{ url_for('update_user', user_id=user.id) }}" style="margin-left: 10px;">
                     [แก้ไข]
