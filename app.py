@@ -282,6 +282,20 @@ def update_post(post_id):
         #    เพื่อให้ฟอร์มสามารถดึงข้อมูลเก่า (post.title, post.content) ไปแสดงได้
         return render_template('update_post.html', post=post_to_update)
 
+# ... (โค้ด Route อื่นๆ) ...
+
+# -----------------------------------------------
+# !!! ROUGE ลับสำหรับ "สร้างตาราง" (ชั่วคราว) !!!
+# (เราจะลบทิ้งทีหลัง)
+# -----------------------------------------------
+@app.route('/Top_22062520') # <-- เปลี่ยนเป็นรหัสลับของคุณ
+def init_database():
+    try:
+        db.create_all() # <-- นี่คือคำสั่งที่เราต้องการรัน!
+        return "SUCCESS: ตารางทั้งหมดถูกสร้างขึ้นแล้ว!"
+    except Exception as e:
+        return f"เกิดข้อผิดพลาด: {str(e)}", 500
+
 
 # --- 8. Run the App ---
 if __name__ == '__main__':
