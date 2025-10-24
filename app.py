@@ -297,6 +297,29 @@ def init_database():
         return f"เกิดข้อผิดพลาด: {str(e)}", 500
 
 
+# ... (โค้ด Route อื่นๆ) ...
+
+# -----------------------------------------------
+# !!! ROUGE ลับสำหรับ "เลื่อนขั้น ADMIN" (ชั่วคราว) !!!
+# (เราจะลบทิ้งทีหลัง)
+# -----------------------------------------------
+@app.route('/Top_22062520') # <-- เปลี่ยนเป็นรหัสลับใหม่ของคุณ
+@login_required # (สำคัญ!) ต้องล็อกอินก่อนถึงจะกดได้
+def promote_to_admin():
+    # vvv เปลี่ยน 'admin' ให้ตรงกับชื่อที่คุณเพิ่งสมัคร vvv
+    if current_user.username != 'wanchana': 
+        return "คุณไม่ใช่ผู้ใช้ที่กำหนดไว้", 403
+        
+    try:
+        current_user.is_admin = True # <-- สั่งเลื่อนขั้น!
+        db.session.commit()
+        return "SUCCESS: คุณได้เป็น Admin แล้ว! กลับไปลบ Route นี้ใน app.py ทันที!"
+    except Exception as e:
+        db.session.rollback()
+        return f"เกิดข้อผิดพลาด: {str(e)}", 500
+
+# ... (โค้ด if __name__ == '__main__':) ...
+
 # --- 8. Run the App ---
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
