@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}หน้าแรก - โพสต์ทั้งหมด{% endblock %}
+
+{% block content %}
+    <h1>โพสต์ทั้งหมด</h1>
+
+    {% for post in posts %}
+        
+        ...
+        <article ...>
+            <h2>{{ post.title }}</h2>
+            <small>
+                เขียนโดย: <strong>{{ post.author.username }}</strong> 
+                เมื่อ: {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}
+            </small>
+
+            {% if post.author == current_user or current_user.is_admin %}
+                <div style="margin-top: 10px;">
+                    <a href="{{ url_for('update_post', post_id=post.id) }}" style="color: blue;">
+                        [แก้ไข]
+                    </a>
+                    
+                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST" style="display: inline; margin-left: 10px;">
+                        <input type="submit" value="ลบ" onclick="return confirm('คุณแน่ใจหรือไม่ว่าจะลบโพสต์นี้?');" style="color: red; background: none; border: none; cursor: pointer; padding: 0;">
+                    </form>
+                </div>
+            {% endif %}
+            <p style="margin-top: 10px;">
+                {{ post.content }}
+            </p>
+        </article>
+...
+
+    {% else %}
+        <h3>ยังไม่มีโพสต์เลย</h3>
+        <p>คุณสามารถเป็นคนแรกที่สร้างโพสต์ได้!</p>
+    {% endfor %}
+    {% endblock %}

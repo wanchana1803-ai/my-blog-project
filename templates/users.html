@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}รายชื่อผู้ใช้{% endblock %}
+{% block content %}
+    <h1>รายชื่อผู้ใช้ทั้งหมด</h1>
+    <ol>
+        {% for user in users %}
+            <li>
+                <strong>{{ user.username }}</strong> (ID: {{ user.id }})
+                
+                <a href="{{ url_for('update_user', user_id=user.id) }}" style="margin-left: 10px;">
+                    [แก้ไข]
+                </a>
+                
+                <form action="{{ url_for('delete_user', user_id=user.id) }}" method="POST" style="display: inline; margin-left: 10px;">
+                    <input type="submit" value="ลบ" onclick="return confirm('แน่ใจหรือไม่?');">
+                </form>
+            </li>
+        {% else %}
+            <li>ยังไม่มีผู้ใช้</li>
+        {% endfor %}
+    </ol>
+{% endblock %}

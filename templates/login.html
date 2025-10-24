@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}ล็อกอิน{% endblock %}
+{% block content %}
+    <h1>ล็อกอิน</h1>
+    {% if message %}
+        <p style="color: red;">{{ message }}</p>
+    {% endif %}
+    <form action="" method="POST">
+        <div>
+            <label>ชื่อผู้ใช้:</label>
+            <input type="text" name="username" required>
+        </div><br>
+        <div>
+            <label>รหัสผ่าน:</label>
+            <input type="password" name="password" required>
+        </div><br>
+        <input type="submit" value="ล็อกอิน">
+    </form>
+    <br>
+    <a href="{{ url_for('register') }}">ยังไม่มีบัญชี?</a>
+{% endblock %}

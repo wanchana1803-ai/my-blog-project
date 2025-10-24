@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        nav {
+            background-color: #333;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('home') }}">หน้าแรก</a>
+            <a href="{{ url_for('new_post') }}">สร้างโพสต์ใหม่</a>
+            {% if current_user.is_admin %}
+                <a href="{{ url_for('user_list') }}">รายชื่อผู้ใช้</a>
+            {% endif %}
+            <a href="{{ url_for('logout') }}">ล็อกเอาต์</a>
+            <span style="color: white; float: right; margin-right: 20px;">
+                สวัสดี, {{ current_user.username }}!
+            </span>
+        {% else %}
+            <a href="{{ url_for('home') }}">หน้าแรก</a>
+            <a href="{{ url_for('about') }}">เกี่ยวกับเรา</a>
+            <a href="{{ url_for('register') }}">ลงทะเบียน</a>
+            <a href="{{ url_for('login') }}">ล็อกอิน</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

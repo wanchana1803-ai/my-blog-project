@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    สร้างโพสต์ใหม่
+{% endblock %}
+
+{% block content %}
+    <h1>สร้างโพสต์ใหม่</h1>
+
+    <form action="" method="POST">
+        <div>
+            <label for="title">หัวข้อ:</label><br>
+            <input type="text" id="title" name="title" required style="width: 70%;">
+        </div>
+        <br>
+        <div>
+            <label for="content">เนื้อหา:</label><br>
+            <textarea id="content" name="content" rows="10" style="width: 70%;" required></textarea>
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="เผยแพร่โพสต์">
+        </div>
+    </form>
+
+{% endblock %}

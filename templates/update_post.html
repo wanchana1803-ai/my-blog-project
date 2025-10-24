@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    แก้ไขโพสต์
+{% endblock %}
+
+{% block content %}
+    <h1>แก้ไขโพสต์</h1>
+
+    <form action="" method="POST">
+        <div>
+            <label for="title">หัวข้อ:</label><br>
+            <input type="text" id="title" name="title" required style="width: 70%;" value="{{ post.title }}">
+        </div>
+        <br>
+        <div>
+            <label for="content">เนื้อหา:</label><br>
+            <textarea id="content" name="content" rows="10" style="width: 70%;" required>{{ post.content }}</textarea>
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="บันทึกการแก้ไข">
+        </div>
+    </form>
+    <br>
+    <a href="{{ url_for('home') }}">ยกเลิก</a>
+{% endblock %}
